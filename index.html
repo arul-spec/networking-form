@@ -1,207 +1,213 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Networking Daily Work Form</title>
-  <style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Site Work Form</title>
+<style>
     body {
-      font-family: Arial, sans-serif;
-      background: #f5f7fa;
-      margin: 0;
-      padding: 20px;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f4f6f8;
+        margin: 0;
+        padding: 0;
     }
-    h1 {
-      text-align: center;
-      color: #2c3e50;
+    .container {
+        max-width: 1000px;
+        margin: auto;
+        background: #ffffff;
+        padding: 25px 30px;
+        border-radius: 12px;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        margin-top: 20px;
+        margin-bottom: 20px;
     }
-    h2 {
-      color: #34495e;
-      border-bottom: 2px solid #ddd;
-      padding-bottom: 5px;
-      margin-top: 25px;
+    h2, h3 {
+        color: #2c3e50;
     }
-    form {
-      max-width: 800px;
-      margin: 20px auto;
-      background: #fff;
-      padding: 20px 30px;
-      border-radius: 10px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    .work-type-buttons {
+        display: flex;
+        gap: 20px;
+        margin-bottom: 25px;
+    }
+    .work-type-buttons button {
+        flex: 1;
+        padding: 14px;
+        font-size: 16px;
+        cursor: pointer;
+        border: none;
+        border-radius: 8px;
+        background-color: #007bff;
+        color: white;
+        transition: background 0.3s;
+    }
+    .work-type-buttons button.active {
+        background-color: #0056b3;
+    }
+    .form-group {
+        margin-bottom: 18px;
     }
     label {
-      display: inline-block;
-      width: 150px;
-      font-weight: bold;
-      margin-bottom: 6px;
-      color: #2c3e50;
+        display: block;
+        font-weight: 500;
+        margin-bottom: 6px;
+        color: #34495e;
     }
-    input {
-      padding: 6px;
-      margin-bottom: 10px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      width: 200px;
+    input[type="text"], input[type="number"], input[type="date"] {
+        width: 100%;
+        padding: 9px;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+        font-size: 14px;
+        box-sizing: border-box;
     }
-    .unit {
-      margin-left: 8px;
-      color: #555;
-      font-size: 0.9em;
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 25px;
     }
-    .button-group {
-      text-align: center;
-      margin-bottom: 20px;
+    th, td {
+        border: 1px solid #ddd;
+        padding: 6px;
+        text-align: center;
+        font-size: 14px;
     }
-    .button-group button {
-      background: #3498db;
-      color: white;
-      border: none;
-      padding: 10px 20px;
-      margin: 0 10px;
-      border-radius: 6px;
-      cursor: pointer;
-      transition: background 0.3s;
-      font-size: 15px;
+    th {
+        background-color: #f0f0f0;
     }
-    .button-group button:hover {
-      background: #2980b9;
+    input[type="number"] {
+        width: 70px;
     }
-    button[type="submit"] {
-      background: #27ae60;
-      margin-top: 20px;
-      width: 100%;
-      padding: 12px;
-      font-size: 16px;
+    .submit-btn {
+        padding: 14px 20px;
+        font-size: 16px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        background-color: #28a745;
+        color: white;
+        width: 100%;
+        font-weight: 500;
     }
-    button[type="submit"]:hover {
-      background: #1e8449;
+    @media (max-width: 768px) {
+        table, th, td {
+            font-size: 12px;
+        }
+        .work-type-buttons {
+            flex-direction: column;
+        }
+        .work-type-buttons button {
+            width: 100%;
+        }
     }
-    #status {
-      text-align: center;
-      font-weight: bold;
-      margin-top: 20px;
-    }
-  </style>
+</style>
 </head>
 <body>
-  <h1>Networking Daily Work Form</h1>
+<div class="container">
+    <h2>Site Work Form</h2>
 
-  <div class="button-group">
-    <button type="button" onclick="showForm('ActualWork')">Actual Work</button>
-    <button type="button" onclick="showForm('BillableWork')">Billable Work</button>
-  </div>
+    <div class="work-type-buttons">
+        <button id="actualBtn" class="active" onclick="selectWorkType('Actual')">Actual</button>
+        <button id="billableBtn" onclick="selectWorkType('Billable')">Billable</button>
+    </div>
 
-  <form id="workForm">
-    <input type="hidden" name="formType" id="formType">
+    <div class="form-group">
+        <label for="clientName">Site / Client Name</label>
+        <input type="text" id="clientName" placeholder="Enter site or client name" required>
 
-    <!-- Ticket Info -->
-    <h2>Ticket Information</h2>
-    <label>Date:</label><input type="date" name="date" required><br>
-    <label>DT ID:</label><input type="text" name="dt_id"><br>
-    <label>SRM ID:</label><input type="text" name="srm_id"><br>
-    <label>Location:</label><input type="text" name="location" required><br>
+        <label for="siteEngineer">Site Engineer Name</label>
+        <input type="text" id="siteEngineer" placeholder="Enter site engineer name" required>
+    </div>
 
-    <!-- Rack -->
-    <h2>Rack</h2>
-    <label>Install:</label><input type="number" name="rack_install"><span class="unit">Nos</span><br>
-    <label>Remove:</label><input type="number" name="rack_remove"><span class="unit">Nos</span><br>
-    <label>Repair:</label><input type="number" name="rack_repair"><span class="unit">Nos</span><br>
-    <label>Size:</label><input type="text" name="rack_size"><span class="unit">U</span><br>
+    <h3>Ticket Information</h3>
+    <div class="form-group">
+        <label for="dtID">DT Ticket ID</label>
+        <input type="text" id="dtID" placeholder="Enter DT Ticket ID" required>
 
-    <!-- Cat6 -->
-    <h2>Cat6</h2>
-    <label>Install:</label><input type="number" name="cat6_install"><span class="unit">Meters</span><br>
-    <label>Remove:</label><input type="number" name="cat6_remove"><span class="unit">Meters</span><br>
-    <label>Repair:</label><input type="number" name="cat6_repair"><span class="unit">Meters</span><br>
-    <label>Size:</label><input type="text" name="cat6_size"><span class="unit">Category</span><br>
+        <label for="srmID">SRM Ticket ID</label>
+        <input type="text" id="srmID" placeholder="Enter SRM Ticket ID" required>
 
-    <!-- PVC -->
-    <h2>PVC</h2>
-    <label>Install:</label><input type="number" name="pvc_install"><span class="unit">Meters</span><br>
-    <label>Remove:</label><input type="number" name="pvc_remove"><span class="unit">Meters</span><br>
-    <label>Repair:</label><input type="number" name="pvc_repair"><span class="unit">Meters</span><br>
-    <label>Size:</label><input type="text" name="pvc_size"><span class="unit">mm</span><br>
+        <label for="workDate">Date</label>
+        <input type="date" id="workDate" required>
 
-    <!-- Switch -->
-    <h2>Switch</h2>
-    <label>Install:</label><input type="number" name="switch_install"><span class="unit">Nos</span><br>
-    <label>Remove:</label><input type="number" name="switch_remove"><span class="unit">Nos</span><br>
-    <label>Repair:</label><input type="number" name="switch_repair"><span class="unit">Nos</span><br>
-    <label>Size:</label><input type="text" name="switch_size"><span class="unit">Ports</span><br>
+        <label for="location">Location</label>
+        <input type="text" id="location" placeholder="Enter location" required>
+    </div>
 
-    <!-- Patch Panel -->
-    <h2>Patch Panel</h2>
-    <label>Install:</label><input type="number" name="patch_install"><span class="unit">Nos</span><br>
-    <label>Remove:</label><input type="number" name="patch_remove"><span class="unit">Nos</span><br>
-    <label>Repair:</label><input type="number" name="patch_repair"><span class="unit">Nos</span><br>
-    <label>Size:</label><input type="text" name="patch_size"><span class="unit">Ports</span><br>
+    <table>
+        <thead>
+            <tr>
+                <th>Work Item</th>
+                <th>Install</th>
+                <th>Remove</th>
+                <th>Repair</th>
+                <th>Meters / Nos / Size</th>
+            </tr>
+        </thead>
+        <tbody id="workTableBody">
+            <script>
+                const workFields = [
+                    'Rack', 'Cat6', 'PVC', 'FPBB', 'IO', 'Patch Panel', 'Switch',
+                    'Patch Cord 1m', 'Patch Cord 2m', 'AP', 'HDPE', 'OFC', 'LIU', 'Splice',
+                    'Trenching Works', 'Wall Cutting', 'Core Cutting'
+                ];
+                for (let field of workFields) {
+                    document.write(`<tr>
+                        <td>${field}</td>
+                        <td><input type="number" min="0" value="0" id="${field.replace(/ /g,'_').toLowerCase()}_install"></td>
+                        <td><input type="number" min="0" value="0" id="${field.replace(/ /g,'_').toLowerCase()}_remove"></td>
+                        <td><input type="number" min="0" value="0" id="${field.replace(/ /g,'_').toLowerCase()}_repair"></td>
+                        <td><input type="number" min="0" value="0" id="${field.replace(/ /g,'_').toLowerCase()}_size"></td>
+                    </tr>`);
+                }
+            </script>
+        </tbody>
+    </table>
 
-    <!-- Access Point -->
-    <h2>Access Point</h2>
-    <label>Install:</label><input type="number" name="ap_install"><span class="unit">Nos</span><br>
-    <label>Remove:</label><input type="number" name="ap_remove"><span class="unit">Nos</span><br>
-    <label>Repair:</label><input type="number" name="ap_repair"><span class="unit">Nos</span><br>
-    <label>Size:</label><input type="text" name="ap_size"><span class="unit">Model</span><br>
+    <button class="submit-btn" id="submitBtn" onclick="submitForm()">Submit Actual Work</button>
+</div>
 
-    <!-- OFC -->
-    <h2>OFC</h2>
-    <label>Install:</label><input type="number" name="ofc_install"><span class="unit">Meters</span><br>
-    <label>Remove:</label><input type="number" name="ofc_remove"><span class="unit">Meters</span><br>
-    <label>Repair:</label><input type="number" name="ofc_repair"><span class="unit">Meters</span><br>
-    <label>Size:</label><input type="text" name="ofc_size"><span class="unit">Core</span><br>
+<script>
+    let selectedWorkType = 'Actual';
 
-    <!-- Splicing -->
-    <h2>Splicing</h2>
-    <label>Install:</label><input type="number" name="splicing_install"><span class="unit">Nos</span><br>
-    <label>Remove:</label><input type="number" name="splicing_remove"><span class="unit">Nos</span><br>
-    <label>Repair:</label><input type="number" name="splicing_repair"><span class="unit">Nos</span><br>
-    <label>Size:</label><input type="text" name="splicing_size"><span class="unit">Core</span><br>
-
-    <!-- WallCutting -->
-    <h2>Splicing</h2>
-    <label>Install:</label><input type="number" name="splicing_install"><span class="unit">Nos</span><br>
-    <label>Remove:</label><input type="number" name="splicing_remove"><span class="unit">Nos</span><br>
-    <label>Repair:</label><input type="number" name="splicing_repair"><span class="unit">Nos</span><br>
-    <label>Size:</label><input type="text" name="splicing_size"><span class="unit">Core</span><br>
-
-    
-    <button type="submit">Submit</button>
-  </form>
-
-  <p id="status"></p>
-
-  <script>
-    const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbymv4lyOhhSxvESprH5HFPhNVH91GYR39GON3Dg4JRIErioOKKdzBbWkRgRWH-PGNI1/exec";
-
-    function showForm(type) {
-      document.getElementById("formType").value = type;
-      document.getElementById("status").innerText = "Filling " + type + " form";
+    function selectWorkType(type) {
+        selectedWorkType = type;
+        document.getElementById('submitBtn').textContent = `Submit ${type} Work`;
+        document.getElementById('actualBtn').classList.remove('active');
+        document.getElementById('billableBtn').classList.remove('active');
+        if (type === 'Actual') {
+            document.getElementById('actualBtn').classList.add('active');
+        } else {
+            document.getElementById('billableBtn').classList.add('active');
+        }
     }
 
-    document.getElementById("workForm").addEventListener("submit", function(e) {
-      e.preventDefault();
-      const formData = new FormData(this);
-      const data = {};
-      formData.forEach((value, key) => { data[key] = value; });
+    function submitForm() {
+        const data = {
+            workType: selectedWorkType,
+            dtID: document.getElementById('dtID').value,
+            srmID: document.getElementById('srmID').value,
+            date: document.getElementById('workDate').value,
+            location: document.getElementById('location').value,
+            siteEngineer: document.getElementById('siteEngineer').value,
+            clientName: document.getElementById('clientName').value
+        };
+        const workFields = [
+            'rack', 'cat6', 'pvc', 'fpbb', 'io', 'patch_panel', 'switch',
+            'patch_cord_1m', 'patch_cord_2m', 'ap', 'hdpe', 'ofc', 'liu', 'splice',
+            'trenching_works', 'wall_cutting', 'core_cutting'
+        ];
+        for (let field of workFields) {
+            data[`${field}_install`] = document.getElementById(`${field}_install`).value;
+            data[`${field}_remove`] = document.getElementById(`${field}_remove`).value;
+            data[`${field}_repair`] = document.getElementById(`${field}_repair`).value;
+            data[`${field}_size`] = document.getElementById(`${field}_size`).value;
+        }
 
-      fetch(GOOGLE_SCRIPT_URL, {
-        method: "POST",
-        body: JSON.stringify(data),
-        headers: { "Content-Type": "application/json" },
-      })
-      .then(res => res.json())
-      .then(res => {
-        document.getElementById("status").innerText = res.status === "success"
-          ? "✅ Submitted successfully"
-          : "❌ Error: " + res.message;
-      })
-      .catch(err => {
-        document.getElementById("status").innerText = "❌ Fetch error: " + err;
-      });
-    });
-  </script>
+        google.script.run.withSuccessHandler(() => {
+            alert(`${selectedWorkType} work submitted successfully!`);
+            location.reload();
+        }).submitWorkData(data);
+    }
+</script>
 </body>
 </html>
-
-
-
-
