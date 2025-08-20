@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Networking Daily Work Form</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f7fa;
+      margin: 0;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+      color: #2c3e50;
+    }
+    h2 {
+      color: #34495e;
+      border-bottom: 2px solid #ddd;
+      padding-bottom: 5px;
+      margin-top: 25px;
+    }
+    form {
+      max-width: 800px;
+      margin: 20px auto;
+      background: #fff;
+      padding: 20px 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    label {
+      display: inline-block;
+      width: 150px;
+      font-weight: bold;
+      margin-bottom: 6px;
+      color: #2c3e50;
+    }
+    input {
+      padding: 6px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      width: 200px;
+    }
+    .unit {
+      margin-left: 8px;
+      color: #555;
+      font-size: 0.9em;
+    }
+    .button-group {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .button-group button {
+      background: #3498db;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      margin: 0 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.3s;
+      font-size: 15px;
+    }
+    .button-group button:hover {
+      background: #2980b9;
+    }
+    button[type="submit"] {
+      background: #27ae60;
+      margin-top: 20px;
+      width: 100%;
+      padding: 12px;
+      font-size: 16px;
+    }
+    button[type="submit"]:hover {
+      background: #1e8449;
+    }
+    #status {
+      text-align: center;
+      font-weight: bold;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Networking Daily Work Form</h1>
+
+  <div class="button-group">
+    <button type="button" onclick="showForm('ActualWork')">Actual Work</button>
+    <button type="button" onclick="showForm('BillableWork')">Billable Work</button>
+  </div>
+
+  <form id="workForm">
+    <input type="hidden" name="formType" id="formType">
+
+    <!-- Ticket Info -->
+    <h2>Ticket Information</h2>
+    <label>Date:</label><input type="date" name="date" required><br>
+    <label>DT ID:</label><input type="text" name="dt_id"><br>
+    <label>SRM ID:</label><input type="text" name="srm_id"><br>
+    <label>Location:</label><input type="text" name="location" required><br>
+
+    <!-- Rack -->
+    <h2>Rack</h2>
+    <label>Install:</label><input type="number" name="rack_install"><span class="unit">Nos</span><br>
+    <label>Remove:</label><input type="number" name="rack_remove"><span class="unit">Nos</span><br>
+    <label>Repair:</label><input type="number" name="rack_repair"><span class="unit">Nos</span><br>
+    <label>Size:</label><input type="text" name="rack_size"><span class="unit">U</span><br>
+
+    <!-- Cat6 -->
+    <h2>Cat6</h2>
+    <label>Install:</label><input type="number" name="cat6_install"><span class="unit">Meters</span><br>
+    <label>Remove:</label><input type="number" name="cat6_remove"><span class="unit">Meters</span><br>
+    <label>Repair:</label><input type="number" name="cat6_repair"><span class="unit">Meters</span><br>
+    <label>Size:</label><input type="text" name="cat6_size"><span class="unit">Category</span><br>
+
+    <!-- PVC -->
+    <h2>PVC</h2>
+    <label>Install:</label><input type="number" name="pvc_install"><span class="unit">Meters</span><br>
+    <label>Remove:</label><input type="number" name="pvc_remove"><span class="unit">Meters</span><br>
+    <label>Repair:</label><input type="number" name="pvc_repair"><span class="unit">Meters</span><br>
+    <label>Size:</label><input type="text" name="pvc_size"><span class="unit">mm</span><br>
+
+    <!-- Switch -->
+    <h2>Switch</h2>
+    <label>Install:</label><input type="number" name="switch_install"><span class="unit">Nos</span><br>
+    <label>Remove:</label><input type="number" name="switch_remove"><span class="unit">Nos</span><br>
+    <label>Repair:</label><input type="number" name="switch_repair"><span class="unit">Nos</span><br>
+    <label>Size:</label><input type="text" name="switch_size"><span class="unit">Ports</span><br>
+
+    <!-- Patch Panel -->
+    <h2>Patch Panel</h2>
+    <label>Install:</label><input type="number" name="patch_install"><span class="unit">Nos</span><br>
+    <label>Remove:</label><input type="number" name="patch_remove"><span class="unit">Nos</span><br>
+    <label>Repair:</label><input type="number" name="patch_repair"><span class="unit">Nos</span><br>
+    <label>Size:</label><input type="text" name="patch_size"><span class="unit">Ports</span><br>
+
+    <!-- Access Point -->
+    <h2>Access Point</h2>
+    <label>Install:</label><input type="number" name="ap_install"><span class="unit">Nos</span><br>
+    <label>Remove:</label><input type="number" name="ap_remove"><span class="unit">Nos</span><br>
+    <label>Repair:</label><input type="number" name="ap_repair"><span class="unit">Nos</span><br>
+    <label>Size:</label><input type="text" name="ap_size"><span class="unit">Model</span><br>
+
+    <!-- OFC -->
+    <h2>OFC</h2>
+    <label>Install:</label><input type="number" name="ofc_install"><span class="unit">Meters</span><br>
+    <label>Remove:</label><input type="number" name="ofc_remove"><span class="unit">Meters</span><br>
+    <label>Repair:</label><input type="number" name="ofc_repair"><span class="unit">Meters</span><br>
+    <label>Size:</label><input type="text" name="ofc_size"><span class="unit">Core</span><br>
+
+    <!-- Splicing -->
+    <h2>Splicing</h2>
+    <label>Install:</label><input type="number" name="splicing_install"><span class="unit">Nos</span><br>
+    <label>Remove:</label><input type="number" name="splicing_remove"><span class="unit">Nos</span><br>
+    <label>Repair:</label><input type="number" name="splicing_repair"><span class="unit">Nos</span><br>
+    <label>Size:</label><input type="text" name="splicing_size"><span class="unit">Core</span><br>
+
+    <button type="submit">Submit</button>
+  </form>
+
+  <p id="status"></p>
+
+  <script>
+    const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbymv4lyOhhSxvESprH5HFPhNVH91GYR39GON3Dg4JRIErioOKKdzBbWkRgRWH-PGNI1/exec";
+
+    function showForm(type) {
+      document.getElementById("formType").value = type;
+      document.getElementById("status").innerText = "Filling " + type + " form";
+    }
+
+    document.getElementById("workForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const formData = new FormData(this);
+      const data = {};
+      formData.forEach((value, key) => { data[key] = value; });
+
+      fetch(GOOGLE_SCRIPT_URL, {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: { "Content-Type": "application/json" },
+      })
+      .then(res => res.json())
+      .then(res => {
+        document.getElementById("status").innerText = res.status === "success"
+          ? "✅ Submitted successfully"
+          : "❌ Error: " + res.message;
+      })
+      .catch(err => {
+        document.getElementById("status").innerText = "❌ Fetch error: " + err;
+      });
+    });
+  </script>
+</body>
+</html>
